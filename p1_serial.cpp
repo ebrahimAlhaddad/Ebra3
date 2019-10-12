@@ -8,7 +8,7 @@ typedef struct{
 }Point; 
 
 int main(void){
-    int num_of_points=40000000
+    int num_of_points=40000000;
     omp_set_num_threads(4);
 	int i,tid;
     int chunk = num_of_points/4;

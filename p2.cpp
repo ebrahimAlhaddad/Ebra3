@@ -24,8 +24,9 @@ int Partition(int *a, int start, int end)
             index++;
         }
     }
-    
-    swap(&a[pivot], &a[index]);
+    int temp = a[pivot];
+    a[pivot] = a[index];
+    a[index] = temp;
     return index;
 }
  
@@ -64,7 +65,7 @@ int main(void){
     
 	if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
 	////////**********Your code goes here***************//
-    #pragma omp parallel shared(m)
+    #pragma omp parallel shared(m,size)
     {
         #pragma omp sections
         {
@@ -74,7 +75,7 @@ int main(void){
             }
             #pragma omp section
             {
-                quickSort(m,size/2,size-1);
+                quickSort(m,(size/2),size-1);
             }
         }
     }

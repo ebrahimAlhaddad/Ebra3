@@ -64,17 +64,18 @@ int main(void){
     
 	if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
 	////////**********Your code goes here***************//
+    int pindex = RandomPivotPartition(a,start,end);
     #pragma omp parallel shared(m,size)
     {
         #pragma omp sections
         {
             #pragma omp section
             {
-                quickSort(m,(size/2),size-1);
+                quickSort(m,pindex+1,size-1);
             }
             #pragma omp section
             {
-                quickSort(m,0,(size/2) - 1);
+                quickSort(m,0,pindex-1);
             }
             
         }

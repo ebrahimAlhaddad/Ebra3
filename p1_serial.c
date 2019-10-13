@@ -35,6 +35,6 @@ int main(void){
 	if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 	time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 		
-	pi =4*(double)num_of_points_in_circle/(double)no_of_points;
+	pi =4*(double)num_of_points_in_circle/(double)num_of_points;
 	printf("Estimated pi is %f, execution time = %f sec\n",  pi, time);		
 }	

@@ -11,7 +11,7 @@ p1_serial.o: p1_serial.c
 	gcc -c p1_serial.c
 
 p1_serial.ex: p1_serial.o
-	gcc -o p1_serial.o
+	gcc -o p1_serial p1_serial.o
 	
 .PHONY: clean
 

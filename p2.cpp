@@ -10,7 +10,7 @@ void swap(int *a, int *b)
     *b = temp;
 }
  
-int Partition(int a[], int start, int end)
+int Partition(int *a, int start, int end)
 {
     int pivot, index, i;
     index = start;
@@ -29,7 +29,7 @@ int Partition(int a[], int start, int end)
     return index;
 }
  
-int RandomPivotPartition(int a[], int start, int end)
+int RandomPivotPartition(int *a, int start, int end)
 {
     int pvt, n, temp;
     n = rand();
@@ -38,7 +38,7 @@ int RandomPivotPartition(int a[], int start, int end)
     return Partition(a, start, end);
 }
  
-int quickSort(int a[], int start, int end)
+int quickSort(int *a, int start, int end)
 {
     int pindex;
     if(start < end)

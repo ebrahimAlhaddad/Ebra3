@@ -10,8 +10,8 @@ p1_b: p1_b.cpp
 p1_serial: p1_serial.c
 	g++ -o p1_serial p1_serial.c
 
-p2_serial: p2_serial.c
-	g++ -o p2_serial p2_serial.c
+p2_serial: p2_serial.cpp
+	g++ -o p2_serial p2_serial.cpp
 
 p2: p2.cpp
 	g++ -lrt -fopenmp -o p2 p2.cpp

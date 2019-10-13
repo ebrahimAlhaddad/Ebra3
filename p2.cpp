@@ -64,7 +64,7 @@ int main(void){
     
 	if( clock_gettime(CLOCK_REALTIME, &start) == -1) { perror("clock gettime");}
 	////////**********Your code goes here***************//
-    int pindex = RandomPivotPartition(a,start,end);
+    int pindex = RandomPivotPartition(m,0,size-1);
     #pragma omp parallel shared(m,size)
     {
         #pragma omp sections
@@ -86,9 +86,9 @@ int main(void){
 	exe_time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 	
 	for(i=0;i<16;i++) printf("%d ", m[i]);
-    printf("%d\n ", m[0]);
-    printf("%d\n ", m[size/2 - 1]);
-    printf("%d\n ", m[size/2]);
-    printf("%d\n ", m[size -1]);
+   // printf("%d\n ", m[0]);
+   // printf("%d\n ", m[size/2 - 1]);
+   // printf("%d\n ", m[size/2]);
+   // printf("%d\n ", m[size -1]);
 	printf("\nExecution time = %f sec\n",  exe_time);
 }	

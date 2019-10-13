@@ -1,6 +1,6 @@
 CC=g++
 
-all: p1_serial p1_a p1_b p2_serial p2
+all: p1_serial p1_a p1_b p2_serial p2 p3
 p1_a: p1_a.cpp
 	g++ -lrt -fopenmp -o p1_a p1_a.cpp
 
@@ -16,6 +16,8 @@ p2_serial: p2_serial.cpp
 p2: p2.cpp
 	g++ -lrt -fopenmp -o p2 p2.cpp
 
+p3: p3.c
+	gcc -lrt -fopenmp -o p3 p3.c
 .PHONY: clean
 
 clean:

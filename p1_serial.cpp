@@ -27,7 +27,7 @@ int main(void){
 	
 	
 	////////**********Use OpenMP to parallize this loop***************//
-#pragma omp parallel shared(data_point,num_of_points,num_of_points_in_circle) private(i,tid)
+#pragma omp parallel shared(data_point,num_of_points) private(i,tid) reduction(+: num_of_points_in_circle)
 {
     tid = omp_get_thread_num();
     #pragma omp for schedule(static,chunk) nowait

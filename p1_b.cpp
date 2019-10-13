@@ -27,12 +27,12 @@ int main(void){
 	
 	
 	////////**********Use OpenMP to parallize this loop***************//
-#pragma omp parallel shared(data_point,num_of_points) private(i,tid) reduction(+: num_of_points_in_circle)
+#pragma omp parallel shared(data_point,num_of_points) private(i,tid)
 {
     tid = omp_get_thread_num();
     #pragma omp sections
     {
-        #pragma omp section
+        #pragma omp section reduction(+: num_of_points_in_circle)
         {
             for(i=0; i<(num_of_points/2); i++){
                 if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25)
@@ -40,7 +40,7 @@ int main(void){
                 num_of_points_in_circle++; }
 	    }
         }
-        #pragma omp section
+        #pragma omp section reduction(+: num_of_points_in_circle)
         {
             for(i=(num_of_points/2); i<num_of_points ; i++){
                 if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25)

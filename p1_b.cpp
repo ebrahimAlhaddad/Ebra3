@@ -9,7 +9,7 @@ typedef struct{
 
 int main(void){
     int num_of_points=40000000;
-    omp_set_num_threads(4);
+    omp_set_num_threads(2);
 	int i,tid;
     int chunk = num_of_points/4;
 	int num_of_points_in_circle;
@@ -30,7 +30,23 @@ int main(void){
 #pragma omp parallel shared(data_point,num_of_points) private(i,tid) reduction(+: num_of_points_in_circle)
 {
     tid = omp_get_thread_num();
-    #pragma omp for schedule(static,chunk) nowait
+    #pragma omp sections
+    {
+        #pragma omp section
+        {
+            for(i=0; i<(num_of_points/2); i++){
+                if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25){
+                num_of_points_in_circle++;
+            }
+        }
+        #pragma omp section
+        {
+            for(i=(num_of_points/2); i<num_of_points ; i++){
+                if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25){
+                num_of_points_in_circle++;
+            }
+        }
+    }
     for(i=0; i<num_of_points; i++){
         if((data_point[i].x-0.5)*(data_point[i].x-0.5)+(data_point[i].y-0.5)*(data_point[i].y-0.5)<=0.25){
             num_of_points_in_circle++;

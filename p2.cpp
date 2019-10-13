@@ -24,9 +24,8 @@ int Partition(int *a, int start, int end)
             index++;
         }
     }
-    int temp = a[pivot];
-    a[pivot] = a[index];
-    a[index] = temp;
+    
+    swap(&a[pivot], &a[index]);
     return index;
 }
  
@@ -71,12 +70,13 @@ int main(void){
         {
             #pragma omp section
             {
-                quickSort(m,0,(size/2) - 1);
+                quickSort(m,(size/2),size-1);
             }
             #pragma omp section
             {
-                quickSort(m,(size/2),size-1);
+                quickSort(m,0,(size/2) - 1);
             }
+            
         }
     }
 	///////******************************////
@@ -84,6 +84,10 @@ int main(void){
 	if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) { perror("clock gettime");}		
 	exe_time = (stop.tv_sec - start.tv_sec)+ (double)(stop.tv_nsec - start.tv_nsec)/1e9;
 	
-	for(i=0;i<16;i++) printf("%d ", m[i]);		
+	for(i=0;i<16;i++) printf("%d ", m[i]);
+    printf("%d ", m[0]);
+    printf("%d ", m[size/2 - 1]);
+    printf("%d ", m[size/2]);
+    printf("%d ", m[size -1]);
 	printf("\nExecution time = %f sec\n",  exe_time);
 }	

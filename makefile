@@ -17,7 +17,7 @@ p2: p2.cpp
 	g++ -lrt -fopenmp -o p2 p2.cpp
 
 p3: p3.c
-	gcc -lrt -fopenmp -o p3 p3.c
+	gcc -lpthread -o p3 p3.c
 .PHONY: clean
 
 clean:

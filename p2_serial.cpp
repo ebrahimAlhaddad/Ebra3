@@ -10,7 +10,7 @@ void swap(int *a, int *b)
     *b = temp;
 }
  
-int Partition(int a[], int start, int end)
+int Partition(int *array, int start, int end)
 {
     int pivot, index, i;
     index = start;
@@ -18,34 +18,34 @@ int Partition(int a[], int start, int end)
  
     for(i=start; i < end; i++)
     {
-        if(a[i] < a[pivot])
+        if(array[i] < array[pivot])
         {
-            swap(&a[i], &a[index]);
+            swap(&array[i], &array[index]);
             index++;
         }
     }
     
-    swap(&a[pivot], &a[index]);
+    swap(&array[pivot], &array[index]);
     return index;
 }
  
-int RandomPivotPartition(int a[], int start, int end)
+int RandomPivotPartition(int *array, int start, int end)
 {
-    int pvt, n, temp;
-    n = rand();
-    pvt = start + n%(end-start+1);
-    swap(&a[end], &a[pvt]);
-    return Partition(a, start, end);
+    int pivot, num, temp;
+    num = rand();
+    pivot = start + num%(end-start+1);
+    swap(&array[end], &array[pivot]);
+    return Partition(array, start, end);
 }
  
-int quickSort(int a[], int start, int end)
+int quickSort(int *array, int start, int end)
 {
-    int pindex;
+    int pivot_index;
     if(start < end)
     {
-        pindex = RandomPivotPartition(a, start, end);
-        quickSort(a, start, pindex-1);
-        quickSort(a, pindex+1, end);
+        pivot_index = RandomPivotPartition(array, start, end);
+        quickSort(array, start, pivot_index-1);
+        quickSort(array, pivot_index+1, end);
     }
     return 0;
 }

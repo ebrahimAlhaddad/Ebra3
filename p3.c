@@ -61,8 +61,8 @@ void *ElementAssigner(void *threadarg){
     int k,i;
     short dist[6];
     short shortest;
-    
-    for(int j = 0; j < ITER; j++){
+    int j;  
+    for(j = 0; j < ITER; j++){
         for(i=start; i < end; i++){
             //assign elements
             for(k=0;k<6;k++){
